@@ -48,10 +48,16 @@ def save_transcription():
     # Read the password from config.yaml
     with open("config.yaml", "r") as file:
         config = yaml.safe_load(file)
-        password = config.get("Password")
+        password_from_file = config.get("Password")
+
+    # Get the password entered in the GUI
+    password_entered = password_entry.get()
+
+    print("Password from file:", password_from_file)
+    print("Password entered:", password_entered)
 
     # Check if the password is correct
-    if password == password_entry.get():
+    if password_from_file == password_entered:
         # Append the transcription to the output file
         with open("output.txt", "a") as file:
             file.write(transcription + "\n")
