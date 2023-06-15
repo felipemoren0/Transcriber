@@ -6,12 +6,12 @@ from datetime import datetime
 import yaml
 import threading
 
-# Variables to control the state of the button and the transcription
+# Variáveis globais para controlar o estado do botão e a transcrição
 listening = False
-transcription = ""
+transcriptions = []
 
 def transcribe_audio():
-    global listening, transcription
+    global listening, transcriptions
 
     # Create a recognizer object
     r = sr.Recognizer()
@@ -35,28 +35,26 @@ def transcribe_audio():
             try:
                 # Perform speech recognition
                 print("Transcribing...")
-                transcription += r.recognize_google(audio) + " "
+                transcription = r.recognize_google(audio)
                 print("Transcription:", transcription)
+                transcriptions.append(transcription)
             except sr.UnknownValueError:
                 print("Speech recognition could not understand audio")
             except sr.RequestError as e:
                 print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
-def save_transcription():
-    global transcription
-
-    # Append the transcription to the output file
+def save_transcriptions():
+    global transcriptions
+    # Append the transcriptions to the output file
     with open("output.txt", "a") as file:
-        file.write(transcription + "\n")
-
-    print("Transcription saved.")
-    print("Transcription content:", transcription)
-    print("Output file path:", file.name)
+        for transcription in transcriptions:
+            file.write(transcription + "\n")
+    print("Transcriptions saved.")
 
 def stop_listening():
     global listening
     listening = False
-    save_transcription()
+    save_transcriptions()
     print("Transcription stopped.")
 
 def start_transcription():
