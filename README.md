@@ -1,5 +1,5 @@
-# Transcriptor
-Transcriptor for meetings using python
+# Transcriber
+Transcriber for meetings using python
 
 # Why?
 Well... Sometimes i forget to take notes on meetings XD 
@@ -8,21 +8,46 @@ Well... Sometimes i forget to take notes on meetings XD
 It will listen to yours audios devices and transcribe it. The output will be saved on a file called Output.txt in the same directory of the script.
 
 # Usage 
-1) Install Python Latest Version : 
+1) Install Python Latest Version
 
-2) Install PiP
+2) Install PiP : 
 
-3) Run the transcriber.py using the command : python transcriber.py
+Download the get-pip.py script from the official Python website: get-pip.py.
 
-4) Click on the "Transcribe" button
+Save the get-pip.py script to a directory on your computer, such as your Downloads folder.
 
-5) Let it running until the meeting ends
+Open a command prompt or PowerShell window:
 
-6) Type your password defined in the config.yaml file 
+Press Win + R, type cmd, and press Enter to open a command prompt.
+Press Win + X, then select "Windows PowerShell" to open PowerShell.
+In the command prompt or PowerShell window, navigate to the directory where you saved the get-pip.py script. For example, if you saved it in the Downloads folder, use the following command:
 
-7) Click on the Stop button
+cd C:\Users\YourUsername\Downloads
+Run the following command to install pip:
+python get-pip.py
 
-8) Check the "Output.txt" file 
+If you have multiple Python versions installed, you may need to specify the version explicitly:
+python3 get-pip.py
+After the installation is complete, you should have pip installed on your system. You can verify it by running the following command:
+
+pip --version
+This should display the version of pip installed on your system.
+
+Now you should be able to use pip to install packages and manage your Python environment on Windows.
+
+3) Run pip install -r requirements.txt
+
+4) Run the transcriber.py using the command : python transcriber.py
+
+5) Click on the "Transcribe" button
+
+6) Let it running until the meeting ends
+
+7) Type your password defined in the config.yaml file 
+
+8) Click on the Stop button
+
+9) Check the "Output.txt" file 
 
 
 # License 
