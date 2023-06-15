@@ -6,7 +6,7 @@ from datetime import datetime
 import yaml
 import threading
 
-# Variáveis globais para controlar o estado do botão e a transcrição
+# Variables to control the state of the button and the transcription
 listening = False
 transcription = ""
 
@@ -45,26 +45,13 @@ def transcribe_audio():
 def save_transcription():
     global transcription
 
-    # Read the password from config.yaml
-    with open("config.yaml", "r") as file:
-        config = yaml.safe_load(file)
-        password_from_file = config.get("Password")
+    # Append the transcription to the output file
+    with open("output.txt", "a") as file:
+        file.write(transcription + "\n")
 
-    # Get the password entered in the GUI
-    password_entered = password_entry.get()
-
-    print("Password from file:", password_from_file)
-    print("Password entered:", password_entered)
-
-    # Check if the password is correct
-    if password_from_file == password_entered:
-        # Append the transcription to the output file
-        with open("output.txt", "a") as file:
-            file.write(transcription + "\n")
-
-        print("Transcription saved.")
-    else:
-        print("Incorrect password. Transcription not saved.")
+    print("Transcription saved.")
+    print("Transcription content:", transcription)
+    print("Output file path:", file.name)
 
 def stop_listening():
     global listening
@@ -83,7 +70,7 @@ def start_transcription():
 
 def create_gui():
     # Create the GUI
-    global transcribe_btn, stop_btn, password_entry
+    global transcribe_btn, stop_btn
 
     window = tk.Tk()
     window.title("Audio Transcription")
@@ -91,12 +78,6 @@ def create_gui():
 
     transcribe_btn = tk.Button(window, text="Transcribe", command=start_transcription)
     transcribe_btn.pack(pady=20)
-
-    password_label = tk.Label(window, text="Password:")
-    password_label.pack()
-
-    password_entry = tk.Entry(window, show="*")
-    password_entry.pack()
 
     stop_btn = tk.Button(window, text="Stop", command=stop_listening, state=tk.DISABLED)
     stop_btn.pack(pady=10)
