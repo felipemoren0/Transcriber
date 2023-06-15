@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import filedialog
 from datetime import datetime
 import yaml
+import threading
 
 # Variáveis globais para controlar o estado do botão e a transcrição
 listening = False
@@ -85,14 +86,14 @@ def create_gui():
     transcribe_btn = tk.Button(window, text="Transcribe", command=start_transcription)
     transcribe_btn.pack(pady=20)
 
-    stop_btn = tk.Button(window, text="Stop", command=stop_listening, state=tk.DISABLED)
-    stop_btn.pack(pady=10)
-
     password_label = tk.Label(window, text="Password:")
     password_label.pack()
 
     password_entry = tk.Entry(window, show="*")
     password_entry.pack()
+
+    stop_btn = tk.Button(window, text="Stop", command=stop_listening, state=tk.DISABLED)
+    stop_btn.pack(pady=10)
 
     window.mainloop()
 
