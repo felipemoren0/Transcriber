@@ -3,7 +3,7 @@ import speech_recognition as sr
 import tkinter as tk
 from tkinter import filedialog
 from datetime import datetime
-import threading
+import yaml
 
 # Variáveis globais para controlar o estado do botão e a transcrição
 listening = False
@@ -44,11 +44,13 @@ def transcribe_audio():
 def save_transcription():
     global transcription
 
-    # Get the password from the user
-    password = password_entry.get()
+    # Read the password from config.yaml
+    with open("config.yaml", "r") as file:
+        config = yaml.safe_load(file)
+        password = config.get("Password")
 
     # Check if the password is correct
-    if password == "JHG9ner45987!*":
+    if password == password_entry.get():
         # Append the transcription to the output file
         with open("output.txt", "a") as file:
             file.write(transcription + "\n")
@@ -77,7 +79,7 @@ def create_gui():
     global transcribe_btn, stop_btn, password_entry
 
     window = tk.Tk()
-    window.title("Audio Transcription by Felipe - Wella ")
+    window.title("Audio Transcription")
     window.geometry("300x250")
 
     transcribe_btn = tk.Button(window, text="Transcribe", command=start_transcription)
